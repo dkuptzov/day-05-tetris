@@ -75,6 +75,35 @@ typedef enum
     FILE_ERROR_STATE
 } frog_state;
 
+typedef enum
+{
+    Start = 0,
+    Pause = 1,
+    Terminate = 2,
+    Left = 3,
+    Right = 4,
+    Up = 5,
+    Down = 6,
+    Action
+} UserAction_t;
+
+typedef struct
+{
+    int **field;
+    int **next;
+    int score;
+    int high_score;
+    int level;
+    int speed;
+    int pause;
+} GameInfo_t;
+
+typedef enum s21_result
+{
+    RETURN_OK = 0,
+    RETURN_WRONG = 1,
+} result_t;
+
 void game_loop(void);
 void print_overlay(void);
 void stats_init(game_stats_t *stats);
@@ -82,5 +111,18 @@ void print_rectangle(int top_y, int bottom_y, int left_x, int right_x);
 
 void print_test(square_t *sq);
 void clear_test(void);
+void change_color(int i, int j, int color);
+UserAction_t get_signal(int user_input);
+int new_figure(int **matrix);
+void s21_copy_field(int **A, int **B);
+int func_up_1(int state_fig, int **field);
+void func_up_2(int state_fig, int **field);
+void func_up_3(int state_fig, int **field);
+int func_up_5(int state_fig, int **field);
+void func_up_6(int state_fig, int **field);
+int func_up_7(int state_fig, int **field);
+void update_TetrisField(int **field);
+void move_FigureDown(int **field);
+void move_FigureLeft(int **field);
 
 #endif
